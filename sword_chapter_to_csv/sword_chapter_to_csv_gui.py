@@ -38,6 +38,7 @@ class ExportApp(tk.Tk):
 
         self.book_var = tk.StringVar()
         self.chapter_var = tk.StringVar(value="1")
+        self.grammar_var = tk.BooleanVar(value=True)
         self.output_var = tk.StringVar()
         self.status_var = tk.StringVar(
             value="Choose one or more texts, book, and chapter, then export."
@@ -83,9 +84,15 @@ class ExportApp(tk.Tk):
             row=2, column=1, sticky="w", pady=4
         )
 
-        ttk.Label(form, text="Output CSV").grid(row=3, column=0, sticky="w", pady=4)
+        ttk.Checkbutton(
+            form,
+            text="Include grammatical data",
+            variable=self.grammar_var,
+        ).grid(row=3, column=0, columnspan=2, sticky="w", pady=(4, 8))
+
+        ttk.Label(form, text="Output CSV").grid(row=4, column=0, sticky="w", pady=4)
         output_row = ttk.Frame(form)
-        output_row.grid(row=3, column=1, sticky="ew", pady=4)
+        output_row.grid(row=4, column=1, sticky="ew", pady=4)
         output_row.columnconfigure(0, weight=1)
         ttk.Entry(output_row, textvariable=self.output_var).grid(row=0, column=0, sticky="ew")
         ttk.Button(output_row, text="Browse…", command=self._browse_output).grid(
@@ -212,15 +219,16 @@ class ExportApp(tk.Tk):
 
         chapter = int(chapter_text)
         output_path = Path(output_text) if output_text else None
+        include_grammatical_data = self.grammar_var.get()
 
         self._set_busy(True)
         self.status_var.set("Exporting…")
         if len(selected_texts) == 1:
             target = self._run_single_export
-            args = (selected_texts[0], book, chapter, output_path)
+            args = (selected_texts[0], book, chapter, output_path, include_grammatical_data)
         else:
             target = self._run_synoptic_export
-            args = (selected_texts, book, chapter, output_path)
+            args = (selected_texts, book, chapter, output_path, include_grammatical_data)
         threading.Thread(target=target, args=args, daemon=True).start()
 
     def _run_synoptic_export(
@@ -229,6 +237,7 @@ class ExportApp(tk.Tk):
         book: str,
         chapter: int,
         output_path: Path | None,
+        include_grammatical_data: bool,
     ) -> None:
         stderr_buffer = io.StringIO()
         try:
@@ -238,6 +247,7 @@ class ExportApp(tk.Tk):
                     chapter,
                     text_names,
                     output_path,
+                    include_grammatical_data=include_grammatical_data,
                 )
         except (FileNotFoundError, KeyError, ValueError) as exc:
             self.after(0, lambda: self._export_failed(str(exc), stderr_buffer.getvalue()))
@@ -257,6 +267,7 @@ class ExportApp(tk.Tk):
         book: str,
         chapter: int,
         output_path: Path | None,
+        include_grammatical_data: bool,
     ) -> None:
         stderr_buffer = io.StringIO()
         try:
@@ -266,6 +277,7 @@ class ExportApp(tk.Tk):
                     book,
                     chapter,
                     output_path,
+                    include_grammatical_data=include_grammatical_data,
                 )
         except (FileNotFoundError, KeyError, ValueError) as exc:
             self.after(0, lambda: self._export_failed(str(exc), stderr_buffer.getvalue()))

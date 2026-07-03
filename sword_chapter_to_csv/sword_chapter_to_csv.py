@@ -460,12 +460,29 @@ def prompt_book_and_chapter(bible) -> tuple[str, int]:
             print(exc)
 
 
-def write_csv(rows: list[dict[str, str]], output_path: Path) -> Path:
+MINIMAL_COLUMNS = ("key", "word")
+
+
+def output_columns(*, include_grammatical_data: bool = True) -> tuple[str, ...]:
+    return CSV_COLUMNS if include_grammatical_data else MINIMAL_COLUMNS
+
+
+def write_csv(
+    rows: list[dict[str, str]],
+    output_path: Path,
+    *,
+    columns: tuple[str, ...] | None = None,
+) -> Path:
     output_path = output_path.resolve()
     temp_path = output_path.with_name(output_path.name + ".tmp")
+    fieldnames = columns or CSV_COLUMNS
 
     with temp_path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=CSV_COLUMNS)
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fieldnames,
+            extrasaction="ignore",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -482,7 +499,11 @@ def write_synoptic_csv(
     temp_path = output_path.with_name(output_path.name + ".tmp")
 
     with temp_path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=columns)
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=columns,
+            extrasaction="ignore",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -507,15 +528,20 @@ def synoptic_prefixed_column(text_name: str, column: str) -> str:
     return f"{text_name}_{column}"
 
 
-def synoptic_column_headers(text_names: list[str]) -> tuple[str, ...]:
+def synoptic_column_headers(
+    text_names: list[str],
+    *,
+    include_grammatical_data: bool = True,
+) -> tuple[str, ...]:
     headers: list[str] = []
     for text_name in text_names:
         headers.append(synoptic_prefixed_column(text_name, "key"))
         headers.append(text_name)
-        headers.extend(
-            synoptic_prefixed_column(text_name, column)
-            for column in SYNOPTIC_METADATA_COLUMNS
-        )
+        if include_grammatical_data:
+            headers.extend(
+                synoptic_prefixed_column(text_name, column)
+                for column in SYNOPTIC_METADATA_COLUMNS
+            )
     return tuple(headers)
 
 
@@ -604,6 +630,8 @@ def _empty_synoptic_fields(text_names: list[str]) -> dict[str, str]:
 def build_synoptic_rows(
     text_row_sets: list[list[dict[str, str]]],
     text_names: list[str],
+    *,
+    include_grammatical_data: bool = True,
 ) -> tuple[list[dict[str, str]], tuple[str, ...]]:
     """Align multiple texts by verse with full morphology columns per text."""
     verse_row_lists = [rows_to_verse_row_lists(rows) for rows in text_row_sets]
@@ -612,7 +640,10 @@ def build_synoptic_rows(
         for verse_list in verse_row_lists
     ]
     ordered_verse_nums = verse_order(word_only_lists)
-    columns = synoptic_column_headers(text_names)
+    columns = synoptic_column_headers(
+        text_names,
+        include_grammatical_data=include_grammatical_data,
+    )
     output_rows: list[dict[str, str]] = []
 
     for verse_num in ordered_verse_nums:
@@ -703,6 +734,7 @@ def export_chapter(
     *,
     sword_dir: Path | None = None,
     module_name: str | None = None,
+    include_grammatical_data: bool = True,
 ) -> tuple[Path, int, str]:
     """Export one chapter to CSV.
 
@@ -731,7 +763,11 @@ def export_chapter(
     rows = add_verse_header_rows(rows)
 
     target = output_path or Path(f"{text_name}_{osis_book}_{chapter}.csv")
-    written_path = write_csv(rows, target)
+    written_path = write_csv(
+        rows,
+        target,
+        columns=output_columns(include_grammatical_data=include_grammatical_data),
+    )
     return written_path, word_count, osis_book
 
 
@@ -740,6 +776,8 @@ def export_synoptic_chapter(
     chapter: int,
     text_names: list[str] | None = None,
     output_path: Path | None = None,
+    *,
+    include_grammatical_data: bool = True,
 ) -> tuple[Path, dict[str, int], str]:
     """Export one chapter with multiple texts aligned in separate columns.
 
@@ -778,7 +816,11 @@ def export_synoptic_chapter(
     if not any(all_row_sets):
         raise ValueError("No words found for that reference.")
 
-    aligned_rows, columns = build_synoptic_rows(all_row_sets, normalized)
+    aligned_rows, columns = build_synoptic_rows(
+        all_row_sets,
+        normalized,
+        include_grammatical_data=include_grammatical_data,
+    )
     word_counts = count_synoptic_words(aligned_rows, normalized)
 
     if output_path is None:
