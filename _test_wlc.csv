@@ -1,0 +1,13 @@
+﻿word,verse,lemma,strongs,morph,morphology,Part of Speech,Tense,Voice,Mood,Person,Number,Case,Gender,xlit,betacode
+וַיְדַבֵּ֥ר,1,c/1696,H1696,HC/Vpw3ms,HC/Vpw3ms,Verb,Sequential imperfect,Piel,Indicative,3,Singular,,Masculine,,
+יְהוָ֖ה,1,3068,H3068,HNp,HNp,Noun (Proper name),,,,,,,,,
+אֶל,1,413,H413,HR,HR,Preposition,,,,,,,,,
+מֹשֶׁ֥ה,1,4872,H4872,HNp,HNp,Noun (Proper name),,,,,,,,,
+לֵּאמֹֽר,1,l/559,H559,HR/Vqc,HR/Vqc,Verb,Infinitive construct,Qal,Infinitive,,,,,,
+דַּבֵּר֙,2,1696,H1696,HVpv2ms,HVpv2ms,Verb,Imperative,Piel,Imperative,2,Singular,,Masculine,,
+אֶל,2,413,H413,HR,HR,Preposition,,,,,,,,,
+בְּנֵ֣י,2,1121 a,H1121,HNcmpc,HNcmpc,Noun (Common),,,,,Plural,Construct,Masculine,,
+יִשְׂרָאֵ֔ל,2,3478,H3478,HNp,HNp,Noun (Proper name),,,,,,,,,
+וְיִקְחוּ,2,c/3947,H3947,HC/Vqj3mp,HC/Vqj3mp,Verb,Jussive,Qal,Jussive,3,Plural,,Masculine,,
+לִ֖י,2,l,,HR/Sp1cs,HR/Sp1cs,Suffix (Pronominal),,,,1,Singular,,Common,,
+תְּרוּמָ֑ה,2,8641,H8641,HNcfsa,HNcfsa,Noun (Common),,,,,Singular,Absolute,Feminine,,

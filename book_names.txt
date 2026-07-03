@@ -1,0 +1,8 @@
+('Gen', 'Gen', 'Genesis')
+('Exod', 'Exod', 'Exodus')
+('Lev', 'Lev', 'Leviticus')
+('Num', 'Num', 'Numbers')
+('Deut', 'Deut', 'Deuteronomy')
+('Josh', 'Josh', 'Joshua')
+('Judg', 'Judg', 'Judges')
+('Ruth', 'Ruth', 'Ruth')

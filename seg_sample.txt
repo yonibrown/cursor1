@@ -1,0 +1,3 @@
+APN" xlit="betacode:CU/LA">ξύλα</w> <w morph="packard:A1B-APN" xlit="betacode:A)/SHPTA">ἄσηπτα</w> 
+<seg/>
+<w lemma="strong:G2532" morph="packard:C" xlit="betacode:KAI\">καὶ</w> <w lemma="strong:G3037" morph="packard:N2-APM" xlit="betacode:LI/QOUS">λίθους</w> <w morph="packard:N2N-GSN" xlit="betacode:SARDI/OU">σαρδίου</w> <w lemma="strong:G2532" morph="packard:C" xlit="betacode:KAI\">καὶ</w> <w lemma="strong:G3037" morph="packard:N2-APM" xlit="betacode:LI/QOUS">λίθους</w> <w lemma="strong:G1519"
