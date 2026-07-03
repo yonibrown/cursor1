@@ -37,8 +37,10 @@ TEXT_SOURCES = {
 DEFAULT_TEXT = "LXX"
 
 CSV_COLUMNS = (
+    "key",
     "word",
     "verse",
+    "word_num",
     "lemma",
     "strongs",
     "morph",
@@ -56,7 +58,7 @@ CSV_COLUMNS = (
 )
 
 SYNOPTIC_METADATA_COLUMNS = tuple(
-    column for column in CSV_COLUMNS if column not in ("word", "verse")
+    column for column in CSV_COLUMNS if column not in ("key", "word", "verse")
 )
 
 PRONOUN_TYPES = {
@@ -508,12 +510,44 @@ def synoptic_prefixed_column(text_name: str, column: str) -> str:
 def synoptic_column_headers(text_names: list[str]) -> tuple[str, ...]:
     headers: list[str] = []
     for text_name in text_names:
+        headers.append(synoptic_prefixed_column(text_name, "key"))
         headers.append(text_name)
         headers.extend(
             synoptic_prefixed_column(text_name, column)
             for column in SYNOPTIC_METADATA_COLUMNS
         )
     return tuple(headers)
+
+
+def make_word_key(
+    text_name: str,
+    book: str,
+    chapter: int,
+    verse: str,
+    word_num: str | int,
+) -> str:
+    """Build a word id: ttt-bbb-ccc-vvv-www (e.g. LXX-Exod-025-001-003)."""
+    return (
+        f"{text_name}-{book}-{int(chapter):03d}-"
+        f"{int(verse):03d}-{int(word_num):03d}"
+    )
+
+
+def assign_word_keys_and_numbers(
+    rows: list[dict[str, str]],
+    text_name: str,
+    book: str,
+    chapter: int,
+) -> list[dict[str, str]]:
+    """Assign word_num and key to each word row within its verse."""
+    numbered: list[dict[str, str]] = []
+    for _, verse_rows in rows_to_verse_row_lists(rows):
+        for index, row in enumerate(verse_rows, start=1):
+            numbered_row = dict(row)
+            numbered_row["word_num"] = str(index)
+            numbered_row["key"] = make_word_key(text_name, book, chapter, row["verse"], index)
+            numbered.append(numbered_row)
+    return numbered
 
 
 def rows_to_verse_row_lists(
@@ -539,9 +573,27 @@ def rows_to_verse_row_lists(
     return verses
 
 
+def verse_header_row(verse_num: str) -> dict[str, str]:
+    """Build a CSV row that marks the start of a verse block."""
+    row = {column: "" for column in CSV_COLUMNS}
+    row["word"] = verse_num
+    row["verse"] = verse_num
+    return row
+
+
+def add_verse_header_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Insert a verse-number row before each verse's words."""
+    expanded: list[dict[str, str]] = []
+    for verse_num, verse_rows in rows_to_verse_row_lists(rows):
+        expanded.append(verse_header_row(verse_num))
+        expanded.extend(verse_rows)
+    return expanded
+
+
 def _empty_synoptic_fields(text_names: list[str]) -> dict[str, str]:
     fields: dict[str, str] = {}
     for text_name in text_names:
+        fields[synoptic_prefixed_column(text_name, "key")] = ""
         fields[text_name] = ""
         for column in SYNOPTIC_METADATA_COLUMNS:
             fields[synoptic_prefixed_column(text_name, column)] = ""
@@ -580,6 +632,7 @@ def build_synoptic_rows(
             for text_name, text_rows in zip(text_names, rows_by_text, strict=True):
                 if word_idx >= max_words - len(text_rows):
                     source_row = text_rows[word_idx - (max_words - len(text_rows))]
+                    aligned[synoptic_prefixed_column(text_name, "key")] = source_row.get("key", "")
                     aligned[text_name] = source_row["word"]
                     for column in SYNOPTIC_METADATA_COLUMNS:
                         aligned[synoptic_prefixed_column(text_name, column)] = source_row.get(
@@ -671,9 +724,13 @@ def export_chapter(
     if not rows:
         raise ValueError("No words found for that reference.")
 
+    word_count = len(rows)
+    rows = assign_word_keys_and_numbers(rows, text_name, osis_book, chapter)
+    rows = add_verse_header_rows(rows)
+
     target = output_path or Path(f"{text_name}_{osis_book}_{chapter}.csv")
     written_path = write_csv(rows, target)
-    return written_path, len(rows), osis_book
+    return written_path, word_count, osis_book
 
 
 def export_synoptic_chapter(
@@ -712,7 +769,9 @@ def export_synoptic_chapter(
         if osis_book is None:
             osis_book = resolved_book
         rows = extract_chapter_rows(text_name, bible, sword_dir, resolved_book, chapter)
-        all_row_sets.append(rows)
+        all_row_sets.append(
+            assign_word_keys_and_numbers(rows, text_name, resolved_book, chapter)
+        )
 
     if not any(all_row_sets):
         raise ValueError("No words found for that reference.")
