@@ -1,5 +1,5 @@
 ﻿key,word,verse,word_num,lemma,strongs,morph,morphology,Part of Speech,Tense,Voice,Mood,Person,Number,Case,Gender,xlit,betacode
-,1,1,,,,,,,,,,,,,,,
+1,1,1,,,,,,,,,,,,,,,
 LXX-Exod-001-001-001,ταῦτα,1,1,strong:G5023,G5023,packard:RD-NPN,RD-NPN,Demonstrative Pronoun,,,,,Plural,Nominative,Neuter,betacode:TAU=TA,TAU=TA
 LXX-Exod-001-001-002,τὰ,1,2,strong:G3588,G3588,packard:RA-NPN,RA-NPN,Article,,,,,Plural,Nominative,Neuter,betacode:TA\,TA\
 LXX-Exod-001-001-003,ὀνόματα,1,3,strong:G3686,G3686,packard:N3M-NPN,N3M-NPN,Noun,,,,,Plural,Nominative,Neuter,betacode:O)NO/MATA,O)NO/MATA
@@ -19,24 +19,24 @@ LXX-Exod-001-001-016,ἕκαστος,1,16,strong:G1538,G1538,packard:A1-NSM,A1-N
 LXX-Exod-001-001-017,πανοικίᾳ,1,17,,,packard:N1A-DSF,N1A-DSF,Noun,,,,,Singular,Dative,Feminine,betacode:PANOIKI/A|,PANOIKI/A|
 LXX-Exod-001-001-018,αὐτῶν,1,18,strong:G846,G846,packard:RD-GPM,RD-GPM,Demonstrative Pronoun,,,,,Plural,Genitive,Masculine,betacode:AU)TW=N,AU)TW=N
 LXX-Exod-001-001-019,εἰσήλθοσαν,1,19,,,packard:VBI-AAI3P,VBI-AAI3P,Verb,Aorist,Active,Indicative,3,Plural,,,betacode:EI)SH/LQOSAN,EI)SH/LQOSAN
-,2,2,,,,,,,,,,,,,,,
+2,2,2,,,,,,,,,,,,,,,
 LXX-Exod-001-002-001,Ρουβην,2,1,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*ROUBHN,*ROUBHN
 LXX-Exod-001-002-002,Συμεων,2,2,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*SUMEWN,*SUMEWN
 LXX-Exod-001-002-003,Λευι,2,3,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*LEUI,*LEUI
 LXX-Exod-001-002-004,Ιουδας,2,4,strong:G2455,G2455,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*IOUDAS,*IOUDAS
-,3,3,,,,,,,,,,,,,,,
+3,3,3,,,,,,,,,,,,,,,
 LXX-Exod-001-003-001,Ισσαχαρ,3,1,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*ISSAXAR,*ISSAXAR
 LXX-Exod-001-003-002,Ζαβουλων,3,2,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*ZABOULWN,*ZABOULWN
 LXX-Exod-001-003-003,καὶ,3,3,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-003-004,Βενιαμιν,3,4,strong:G958,G958,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*BENIAMIN,*BENIAMIN
-,4,4,,,,,,,,,,,,,,,
+4,4,4,,,,,,,,,,,,,,,
 LXX-Exod-001-004-001,Δαν,4,1,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*DAN,*DAN
 LXX-Exod-001-004-002,καὶ,4,2,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-004-003,Νεφθαλι,4,3,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*NEFQALI,*NEFQALI
 LXX-Exod-001-004-004,Γαδ,4,4,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*GAD,*GAD
 LXX-Exod-001-004-005,καὶ,4,5,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-004-006,Ασηρ,4,6,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*ASHR,*ASHR
-,5,5,,,,,,,,,,,,,,,
+5,5,5,,,,,,,,,,,,,,,
 LXX-Exod-001-005-001,Ιωσηφ,5,1,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*IWSHF,*IWSHF
 LXX-Exod-001-005-002,δὲ,5,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-005-003,ἦν,5,3,strong:G1510,G1510,packard:V9-IAI3S,V9-IAI3S,Verb,Imperfect,Active,Indicative,3,Singular,,,betacode:H)=N,H)=N
@@ -51,7 +51,7 @@ LXX-Exod-001-005-011,Ιακωβ,5,11,strong:G2384,G2384,packard:N-GSM,N-GSM,Noun
 LXX-Exod-001-005-012,πέντε,5,12,strong:G4002,G4002,packard:M,M,Numeral,,,,,,,,betacode:PE/NTE,PE/NTE
 LXX-Exod-001-005-013,καὶ,5,13,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-005-014,ἑβδομήκοντα,5,14,strong:G1440,G1440,packard:M,M,Numeral,,,,,,,,betacode:E(BDOMH/KONTA,E(BDOMH/KONTA
-,6,6,,,,,,,,,,,,,,,
+6,6,6,,,,,,,,,,,,,,,
 LXX-Exod-001-006-001,ἐτελεύτησεν,6,1,strong:G5053,G5053,packard:VAI-AAI3S,VAI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:E)TELEU/THSEN,E)TELEU/THSEN
 LXX-Exod-001-006-002,δὲ,6,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-006-003,Ιωσηφ,6,3,,,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*IWSHF,*IWSHF
@@ -65,7 +65,7 @@ LXX-Exod-001-006-010,πᾶσα,6,10,strong:G3956,G3956,packard:A1S-NSF,A1S-NSF,A
 LXX-Exod-001-006-011,ἡ,6,11,strong:G3588,G3588,packard:RA-NSF,RA-NSF,Article,,,,,Singular,Nominative,Feminine,betacode:H(,H(
 LXX-Exod-001-006-012,γενεὰ,6,12,strong:G1074,G1074,packard:N1A-NSF,N1A-NSF,Noun,,,,,Singular,Nominative,Feminine,betacode:GENEA\,GENEA\
 LXX-Exod-001-006-013,ἐκείνη,6,13,strong:G1565,G1565,packard:RD-NSF,RD-NSF,Demonstrative Pronoun,,,,,Singular,Nominative,Feminine,betacode:E)KEI/NH,E)KEI/NH
-,7,7,,,,,,,,,,,,,,,
+7,7,7,,,,,,,,,,,,,,,
 LXX-Exod-001-007-001,οἱ,7,1,strong:G3588,G3588,packard:RA-NPM,RA-NPM,Article,,,,,Plural,Nominative,Masculine,betacode:OI(,OI(
 LXX-Exod-001-007-002,δὲ,7,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-007-003,υἱοὶ,7,3,strong:G5207,G5207,packard:N2-NPM,N2-NPM,Noun,,,,,Plural,Nominative,Masculine,betacode:UI(OI\,UI(OI\
@@ -85,7 +85,7 @@ LXX-Exod-001-007-016,δὲ,7,16,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,b
 LXX-Exod-001-007-017,ἡ,7,17,strong:G3588,G3588,packard:RA-NSF,RA-NSF,Article,,,,,Singular,Nominative,Feminine,betacode:H(,H(
 LXX-Exod-001-007-018,γῆ,7,18,strong:G1093,G1093,packard:N1-NSF,N1-NSF,Noun,,,,,Singular,Nominative,Feminine,betacode:GH=,GH=
 LXX-Exod-001-007-019,αὐτούς,7,19,strong:G846,G846,packard:RD-APM,RD-APM,Demonstrative Pronoun,,,,,Plural,Accusative,Masculine,betacode:AU)TOU/S,AU)TOU/S
-,8,8,,,,,,,,,,,,,,,
+8,8,8,,,,,,,,,,,,,,,
 LXX-Exod-001-008-001,ἀνέστη,8,1,strong:G450,G450,packard:VHI-AAI3S,VHI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:A)NE/STH,A)NE/STH
 LXX-Exod-001-008-002,δὲ,8,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-008-003,βασιλεὺς,8,3,strong:G935,G935,packard:N3V-NSM,N3V-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:BASILEU\S,BASILEU\S
@@ -97,7 +97,7 @@ LXX-Exod-001-008-008,οὐκ,8,8,strong:G3756,G3756,packard:D,D,Adverb,,,,,,,,be
 LXX-Exod-001-008-009,ᾔδει,8,9,strong:G1492,G1492,packard:VXI-YAI3S,VXI-YAI3S,Verb,Pluperfect,Active,Indicative,3,Singular,,,betacode:H)/|DEI,H)/|DEI
 LXX-Exod-001-008-010,τὸν,8,10,strong:G3588,G3588,packard:RA-ASM,RA-ASM,Article,,,,,Singular,Accusative,Masculine,betacode:TO\N,TO\N
 LXX-Exod-001-008-011,Ιωσηφ,8,11,,,packard:N-ASM,N-ASM,Noun,,,,,Singular,Accusative,Masculine,betacode:*IWSHF,*IWSHF
-,9,9,,,,,,,,,,,,,,,
+9,9,9,,,,,,,,,,,,,,,
 LXX-Exod-001-009-001,εἶπεν,9,1,strong:G2036,G2036,packard:VBI-AAI3S,VBI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:EI)=PEN,EI)=PEN
 LXX-Exod-001-009-002,δὲ,9,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-009-003,τῷ,9,3,strong:G3588,G3588,packard:RA-DSN,RA-DSN,Article,,,,,Singular,Dative,Neuter,betacode:TW=|,TW=|
@@ -115,7 +115,7 @@ LXX-Exod-001-009-014,καὶ,9,14,strong:G2532,G2532,packard:C,C,Conjunction,,,,
 LXX-Exod-001-009-015,ἰσχύει,9,15,strong:G2480,G2480,packard:V1-PAI3S,V1-PAI3S,Verb,Present,Active,Indicative,3,Singular,,,betacode:I)SXU/EI,I)SXU/EI
 LXX-Exod-001-009-016,ὑπὲρ,9,16,strong:G5228,G5228,packard:P,P,Preposition,,,,,,,,betacode:U(PE\R,U(PE\R
 LXX-Exod-001-009-017,ἡμᾶς,9,17,strong:G2248,G2248,packard:RP-AP,RP-AP,Personal/Possessive Pronoun,,,,,Plural,Accusative,,betacode:H(MA=S,H(MA=S
-,10,10,,,,,,,,,,,,,,,
+10,10,10,,,,,,,,,,,,,,,
 LXX-Exod-001-010-001,δεῦτε,10,1,strong:G1205,G1205,packard:D,D,Adverb,,,,,,,,betacode:DEU=TE,DEU=TE
 LXX-Exod-001-010-002,οὖν,10,2,strong:G3767,G3767,packard:X,X,Particle,,,,,,,,betacode:OU)=N,OU)=N
 LXX-Exod-001-010-003,κατασοφισώμεθα,10,3,,,packard:VA-AAS1P,VA-AAS1P,Verb,Aorist,Active,Subjunctive,1,Plural,,,betacode:KATASOFISW/MEQA,KATASOFISW/MEQA
@@ -141,7 +141,7 @@ LXX-Exod-001-010-022,ἐξελεύσονται,10,22,,,packard:VF-FMI3P,VF-FMI3P
 LXX-Exod-001-010-023,ἐκ,10,23,strong:G1537,G1537,packard:P,P,Preposition,,,,,,,,betacode:E)K,E)K
 LXX-Exod-001-010-024,τῆς,10,24,strong:G3588,G3588,packard:RA-GSF,RA-GSF,Article,,,,,Singular,Genitive,Feminine,betacode:TH=S,TH=S
 LXX-Exod-001-010-025,γῆς,10,25,strong:G1093,G1093,packard:N1-GSF,N1-GSF,Noun,,,,,Singular,Genitive,Feminine,betacode:GH=S,GH=S
-,11,11,,,,,,,,,,,,,,,
+11,11,11,,,,,,,,,,,,,,,
 LXX-Exod-001-011-001,καὶ,11,1,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-011-002,ἐπέστησεν,11,2,strong:G1987,G1987,packard:VHI-AAI3S,VHI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:E)PE/STHSEN,E)PE/STHSEN
 LXX-Exod-001-011-003,αὐτοῖς,11,3,strong:G846,G846,packard:RD-DPM,RD-DPM,Demonstrative Pronoun,,,,,Plural,Dative,Masculine,betacode:AU)TOI=S,AU)TOI=S
@@ -171,7 +171,7 @@ LXX-Exod-001-011-026,ἥ,11,26,strong:G3739,G3739,packard:RR-NSF,RR-NSF,Relative
 LXX-Exod-001-011-027,ἐστιν,11,27,strong:G1510,G1510,packard:V9-PAI3S,V9-PAI3S,Verb,Present,Active,Indicative,3,Singular,,,betacode:E)STIN,E)STIN
 LXX-Exod-001-011-028,Ἡλίου,11,28,strong:G2246,G2246,packard:N2-GSM,N2-GSM,Noun,,,,,Singular,Genitive,Masculine,betacode:*H(LI/OU,*H(LI/OU
 LXX-Exod-001-011-029,πόλις,11,29,strong:G4172,G4172,packard:N3I-NSF,N3I-NSF,Noun,,,,,Singular,Nominative,Feminine,betacode:PO/LIS,PO/LIS
-,12,12,,,,,,,,,,,,,,,
+12,12,12,,,,,,,,,,,,,,,
 LXX-Exod-001-012-001,καθότι,12,1,strong:G2530,G2530,packard:D,D,Adverb,,,,,,,,betacode:KAQO/TI,KAQO/TI
 LXX-Exod-001-012-002,δὲ,12,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-012-003,αὐτοὺς,12,3,strong:G846,G846,packard:RD-APM,RD-APM,Demonstrative Pronoun,,,,,Plural,Accusative,Masculine,betacode:AU)TOU\S,AU)TOU\S
@@ -191,7 +191,7 @@ LXX-Exod-001-012-016,ἀπὸ,12,16,strong:G575,G575,packard:P,P,Preposition,,,,
 LXX-Exod-001-012-017,τῶν,12,17,strong:G3588,G3588,packard:RA-GPM,RA-GPM,Article,,,,,Plural,Genitive,Masculine,betacode:TW=N,TW=N
 LXX-Exod-001-012-018,υἱῶν,12,18,strong:G5207,G5207,packard:N2-GPM,N2-GPM,Noun,,,,,Plural,Genitive,Masculine,betacode:UI(W=N,UI(W=N
 LXX-Exod-001-012-019,Ισραηλ,12,19,strong:G2474,G2474,packard:N-GSM,N-GSM,Noun,,,,,Singular,Genitive,Masculine,betacode:*ISRAHL,*ISRAHL
-,13,13,,,,,,,,,,,,,,,
+13,13,13,,,,,,,,,,,,,,,
 LXX-Exod-001-013-001,καὶ,13,1,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-013-002,κατεδυνάστευον,13,2,strong:G2616,G2616,packard:V1I-IAI3P,V1I-IAI3P,Verb,Imperfect,Active,Indicative,3,Plural,,,betacode:KATEDUNA/STEUON,KATEDUNA/STEUON
 LXX-Exod-001-013-003,οἱ,13,3,strong:G3588,G3588,packard:RA-NPM,RA-NPM,Article,,,,,Plural,Nominative,Masculine,betacode:OI(,OI(
@@ -200,7 +200,7 @@ LXX-Exod-001-013-005,τοὺς,13,5,strong:G3588,G3588,packard:RA-APM,RA-APM,Art
 LXX-Exod-001-013-006,υἱοὺς,13,6,strong:G5207,G5207,packard:N2-APM,N2-APM,Noun,,,,,Plural,Accusative,Masculine,betacode:UI(OU\S,UI(OU\S
 LXX-Exod-001-013-007,Ισραηλ,13,7,strong:G2474,G2474,packard:N-GSM,N-GSM,Noun,,,,,Singular,Genitive,Masculine,betacode:*ISRAHL,*ISRAHL
 LXX-Exod-001-013-008,βίᾳ,13,8,strong:G970,G970,packard:N1A-DSF,N1A-DSF,Noun,,,,,Singular,Dative,Feminine,betacode:BI/A|,BI/A|
-,14,14,,,,,,,,,,,,,,,
+14,14,14,,,,,,,,,,,,,,,
 LXX-Exod-001-014-001,καὶ,14,1,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-014-002,κατωδύνων,14,2,,,packard:V1I-IAI3P,V1I-IAI3P,Verb,Imperfect,Active,Indicative,3,Plural,,,betacode:KATWDU/NWN,KATWDU/NWN
 LXX-Exod-001-014-003,αὐτῶν,14,3,strong:G846,G846,packard:RD-GPM,RD-GPM,Demonstrative Pronoun,,,,,Plural,Genitive,Masculine,betacode:AU)TW=N,AU)TW=N
@@ -233,7 +233,7 @@ LXX-Exod-001-014-029,κατεδουλοῦντο,14,29,,,packard:V4I-IMI3P,V4I-I
 LXX-Exod-001-014-030,αὐτοὺς,14,30,strong:G846,G846,packard:RD-APM,RD-APM,Demonstrative Pronoun,,,,,Plural,Accusative,Masculine,betacode:AU)TOU\S,AU)TOU\S
 LXX-Exod-001-014-031,μετὰ,14,31,strong:G3326,G3326,packard:P,P,Preposition,,,,,,,,betacode:META\,META\
 LXX-Exod-001-014-032,βίας,14,32,strong:G970,G970,packard:N1A-GSF,N1A-GSF,Noun,,,,,Singular,Genitive,Feminine,betacode:BI/AS,BI/AS
-,15,15,,,,,,,,,,,,,,,
+15,15,15,,,,,,,,,,,,,,,
 LXX-Exod-001-015-001,καὶ,15,1,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-015-002,εἶπεν,15,2,strong:G2036,G2036,packard:VBI-AAI3S,VBI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:EI)=PEN,EI)=PEN
 LXX-Exod-001-015-003,ὁ,15,3,strong:G3588,G3588,packard:RA-NSM,RA-NSM,Article,,,,,Singular,Nominative,Masculine,betacode:O(,O(
@@ -256,7 +256,7 @@ LXX-Exod-001-015-019,ὄνομα,15,19,strong:G3686,G3686,packard:N3M-NSN,N3M-NS
 LXX-Exod-001-015-020,τῆς,15,20,strong:G3588,G3588,packard:RA-GSF,RA-GSF,Article,,,,,Singular,Genitive,Feminine,betacode:TH=S,TH=S
 LXX-Exod-001-015-021,δευτέρας,15,21,strong:G1208,G1208,packard:A1A-GSF,A1A-GSF,Adjective,,,,,Singular,Genitive,Feminine,betacode:DEUTE/RAS,DEUTE/RAS
 LXX-Exod-001-015-022,Φουα,15,22,,,packard:N-NSF,N-NSF,Noun,,,,,Singular,Nominative,Feminine,betacode:*FOUA,*FOUA
-,16,16,,,,,,,,,,,,,,,
+16,16,16,,,,,,,,,,,,,,,
 LXX-Exod-001-016-001,καὶ,16,1,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-016-002,εἶπεν,16,2,strong:G2036,G2036,packard:VBI-AAI3S,VBI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:EI)=PEN,EI)=PEN
 LXX-Exod-001-016-003,ὅταν,16,3,strong:G3752,G3752,packard:D,D,Adverb,,,,,,,,betacode:O(/TAN,O(/TAN
@@ -279,7 +279,7 @@ LXX-Exod-001-016-019,δὲ,16,19,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,
 LXX-Exod-001-016-020,θῆλυ,16,20,strong:G2338,G2338,packard:A3U-NSN,A3U-NSN,Adjective,,,,,Singular,Nominative,Neuter,betacode:QH=LU,QH=LU
 LXX-Exod-001-016-021,περιποιεῖσθε,16,21,,,packard:V2-PMD2P,V2-PMD2P,Verb,Present,Middle,Imperative,2,Plural,,,betacode:PERIPOIEI=SQE,PERIPOIEI=SQE
 LXX-Exod-001-016-022,αὐτό,16,22,strong:G846,G846,packard:RD-ASN,RD-ASN,Demonstrative Pronoun,,,,,Singular,Accusative,Neuter,betacode:AU)TO/,AU)TO/
-,17,17,,,,,,,,,,,,,,,
+17,17,17,,,,,,,,,,,,,,,
 LXX-Exod-001-017-001,ἐφοβήθησαν,17,1,strong:G5399,G5399,packard:VCI-API3P,VCI-API3P,Verb,Aorist,Passive,Indicative,3,Plural,,,betacode:E)FOBH/QHSAN,E)FOBH/QHSAN
 LXX-Exod-001-017-002,δὲ,17,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-017-003,αἱ,17,3,strong:G3588,G3588,packard:RA-NPF,RA-NPF,Article,,,,,Plural,Nominative,Feminine,betacode:AI(,AI(
@@ -299,7 +299,7 @@ LXX-Exod-001-017-016,καὶ,17,16,strong:G2532,G2532,packard:C,C,Conjunction,,,
 LXX-Exod-001-017-017,ἐζωογόνουν,17,17,strong:G2225,G2225,packard:V2I-IAI3P,V2I-IAI3P,Verb,Imperfect,Active,Indicative,3,Plural,,,betacode:E)ZWOGO/NOUN,E)ZWOGO/NOUN
 LXX-Exod-001-017-018,τὰ,17,18,strong:G3588,G3588,packard:RA-APN,RA-APN,Article,,,,,Plural,Accusative,Neuter,betacode:TA\,TA\
 LXX-Exod-001-017-019,ἄρσενα,17,19,,,packard:A3-APN,A3-APN,Adjective,,,,,Plural,Accusative,Neuter,betacode:A)/RSENA,A)/RSENA
-,18,18,,,,,,,,,,,,,,,
+18,18,18,,,,,,,,,,,,,,,
 LXX-Exod-001-018-001,ἐκάλεσεν,18,1,strong:G2564,G2564,packard:VAI-AAI3S,VAI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:E)KA/LESEN,E)KA/LESEN
 LXX-Exod-001-018-002,δὲ,18,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-018-003,ὁ,18,3,strong:G3588,G3588,packard:RA-NSM,RA-NSM,Article,,,,,Singular,Nominative,Masculine,betacode:O(,O(
@@ -320,7 +320,7 @@ LXX-Exod-001-018-017,καὶ,18,17,strong:G2532,G2532,packard:C,C,Conjunction,,,
 LXX-Exod-001-018-018,ἐζωογονεῖτε,18,18,strong:G2225,G2225,packard:V2I-IAI2P,V2I-IAI2P,Verb,Imperfect,Active,Indicative,2,Plural,,,betacode:E)ZWOGONEI=TE,E)ZWOGONEI=TE
 LXX-Exod-001-018-019,τὰ,18,19,strong:G3588,G3588,packard:RA-APN,RA-APN,Article,,,,,Plural,Accusative,Neuter,betacode:TA\,TA\
 LXX-Exod-001-018-020,ἄρσενα,18,20,,,packard:A3-APN,A3-APN,Adjective,,,,,Plural,Accusative,Neuter,betacode:A)/RSENA,A)/RSENA
-,19,19,,,,,,,,,,,,,,,
+19,19,19,,,,,,,,,,,,,,,
 LXX-Exod-001-019-001,εἶπαν,19,1,strong:G2036,G2036,packard:VAI-AAI3P,VAI-AAI3P,Verb,Aorist,Active,Indicative,3,Plural,,,betacode:EI)=PAN,EI)=PAN
 LXX-Exod-001-019-002,δὲ,19,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-019-003,αἱ,19,3,strong:G3588,G3588,packard:RA-NPF,RA-NPF,Article,,,,,Plural,Nominative,Feminine,betacode:AI(,AI(
@@ -344,7 +344,7 @@ LXX-Exod-001-019-020,τὰς,19,20,strong:G3588,G3588,packard:RA-APF,RA-APF,Arti
 LXX-Exod-001-019-021,μαίας,19,21,,,packard:N1A-APF,N1A-APF,Noun,,,,,Plural,Accusative,Feminine,betacode:MAI/AS,MAI/AS
 LXX-Exod-001-019-022,καὶ,19,22,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-019-023,ἔτικτον,19,23,strong:G5088,G5088,packard:V1I-IAI3P,V1I-IAI3P,Verb,Imperfect,Active,Indicative,3,Plural,,,betacode:E)/TIKTON,E)/TIKTON
-,20,20,,,,,,,,,,,,,,,
+20,20,20,,,,,,,,,,,,,,,
 LXX-Exod-001-020-001,εὖ,20,1,strong:G2095,G2095,packard:D,D,Adverb,,,,,,,,betacode:EU)=,EU)=
 LXX-Exod-001-020-002,δὲ,20,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-020-003,ἐποίει,20,3,strong:G4160,G4160,packard:V2I-IAI3S,V2I-IAI3S,Verb,Imperfect,Active,Indicative,3,Singular,,,betacode:E)POI/EI,E)POI/EI
@@ -359,7 +359,7 @@ LXX-Exod-001-020-011,λαὸς,20,11,strong:G2992,G2992,packard:N2-NSM,N2-NSM,No
 LXX-Exod-001-020-012,καὶ,20,12,strong:G2532,G2532,packard:C,C,Conjunction,,,,,,,,betacode:KAI\,KAI\
 LXX-Exod-001-020-013,ἴσχυεν,20,13,strong:G2480,G2480,packard:V1I-IAI3S,V1I-IAI3S,Verb,Imperfect,Active,Indicative,3,Singular,,,betacode:I)/SXUEN,I)/SXUEN
 LXX-Exod-001-020-014,σφόδρα,20,14,strong:G4970,G4970,packard:D,D,Adverb,,,,,,,,betacode:SFO/DRA,SFO/DRA
-,21,21,,,,,,,,,,,,,,,
+21,21,21,,,,,,,,,,,,,,,
 LXX-Exod-001-021-001,ἐπειδὴ,21,1,strong:G1894,G1894,packard:C,C,Conjunction,,,,,,,,betacode:E)PEIDH\,E)PEIDH\
 LXX-Exod-001-021-002,ἐφοβοῦντο,21,2,strong:G5399,G5399,packard:V2I-IMI3P,V2I-IMI3P,Verb,Imperfect,Middle,Indicative,3,Plural,,,betacode:E)FOBOU=NTO,E)FOBOU=NTO
 LXX-Exod-001-021-003,αἱ,21,3,strong:G3588,G3588,packard:RA-NPF,RA-NPF,Article,,,,,Plural,Nominative,Feminine,betacode:AI(,AI(
@@ -369,7 +369,7 @@ LXX-Exod-001-021-006,θεόν,21,6,strong:G2316,G2316,packard:N2-ASM,N2-ASM,Noun
 LXX-Exod-001-021-007,ἐποίησαν,21,7,strong:G4160,G4160,packard:VAI-AAI3P,VAI-AAI3P,Verb,Aorist,Active,Indicative,3,Plural,,,betacode:E)POI/HSAN,E)POI/HSAN
 LXX-Exod-001-021-008,ἑαυταῖς,21,8,strong:G1438,G1438,packard:RD-DPF,RD-DPF,Demonstrative Pronoun,,,,,Plural,Dative,Feminine,betacode:E(AUTAI=S,E(AUTAI=S
 LXX-Exod-001-021-009,οἰκίας,21,9,strong:G3614,G3614,packard:N1A-APF,N1A-APF,Noun,,,,,Plural,Accusative,Feminine,betacode:OI)KI/AS,OI)KI/AS
-,22,22,,,,,,,,,,,,,,,
+22,22,22,,,,,,,,,,,,,,,
 LXX-Exod-001-022-001,συνέταξεν,22,1,strong:G4929,G4929,packard:VAI-AAI3S,VAI-AAI3S,Verb,Aorist,Active,Indicative,3,Singular,,,betacode:SUNE/TACEN,SUNE/TACEN
 LXX-Exod-001-022-002,δὲ,22,2,strong:G1161,G1161,packard:X,X,Particle,,,,,,,,betacode:DE\,DE\
 LXX-Exod-001-022-003,Φαραω,22,3,strong:G5328,G5328,packard:N-NSM,N-NSM,Noun,,,,,Singular,Nominative,Masculine,betacode:*FARAW,*FARAW

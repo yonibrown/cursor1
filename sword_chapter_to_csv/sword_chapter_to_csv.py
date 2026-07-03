@@ -576,6 +576,7 @@ def rows_to_verse_row_lists(
 def verse_header_row(verse_num: str) -> dict[str, str]:
     """Build a CSV row that marks the start of a verse block."""
     row = {column: "" for column in CSV_COLUMNS}
+    row["key"] = verse_num
     row["word"] = verse_num
     row["verse"] = verse_num
     return row
@@ -623,6 +624,7 @@ def build_synoptic_rows(
         verse_row = _empty_synoptic_fields(text_names)
         for text_name, text_rows in zip(text_names, rows_by_text, strict=True):
             if text_rows:
+                verse_row[synoptic_prefixed_column(text_name, "key")] = verse_num
                 verse_row[text_name] = verse_num
         output_rows.append(verse_row)
 
