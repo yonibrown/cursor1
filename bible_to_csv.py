@@ -4,6 +4,20 @@
 Each input file becomes one CSV column. Verse numbers appear on the same row
 across columns; following rows contain the words of that verse, bottom-aligned
 so the last word of each verse ends on the same row.
+
+Input format
+------------
+Plain UTF-8 text where verse numbers are glued to the first word of each verse
+(e.g. ``1In the beginning`` or ``10And God said``). Whitespace is normalized
+before parsing.
+
+Example layout for one verse (Hebrew column shorter than Greek)::
+
+    verse | 1      | 1
+    word  |        | καὶ
+    word  |        | εἶπεν
+    word  | וַיֹּאמֶר | ὁ
+    word  |        | θεός
 """
 
 from __future__ import annotations
@@ -14,7 +28,10 @@ import re
 import sys
 from pathlib import Path
 
-# Digits at a word boundary followed by verse text (glued or after a space).
+# Match a run of digits only when it starts a verse: either at text start or
+# after whitespace, and followed by non-digit text (or space). Without the
+# look-ahead and the whitespace check in _verse_starts(), "10" in "10And..."
+# would be split into verse "1" and stray "0".
 VERSE_NUMBER = re.compile(r"(\d+)(?=[^\d\s]|\s)")
 
 
@@ -22,6 +39,7 @@ def _verse_starts(text: str) -> list[re.Match[str]]:
     """Return matches where a full verse number begins."""
     matches: list[re.Match[str]] = []
     for match in VERSE_NUMBER.finditer(text):
+        # Require a word boundary before the digits so mid-word numbers are ignored.
         if match.start() == 0 or text[match.start() - 1].isspace():
             matches.append(match)
     return matches
@@ -35,6 +53,7 @@ def parse_bible_verses(text: str) -> list[tuple[str, list[str]]]:
 
     matches = _verse_starts(normalized)
     if not matches:
+        # No verse markers: treat the whole file as one anonymous block of words.
         return [("", normalized.split())]
 
     verses: list[tuple[str, list[str]]] = []
@@ -66,6 +85,7 @@ def align_verse_rows(
     ordered_verse_nums: list[str],
 ) -> list[list[str]]:
     """Build CSV rows with each verse ending on the same row in every column."""
+    # One lookup table per input file: verse number -> word list.
     verse_maps = [{num: words for num, words in verses} for verses in all_verses]
     rows: list[list[str]] = []
 
@@ -76,6 +96,7 @@ def align_verse_rows(
         for verse_map in verse_maps:
             words = verse_map.get(verse_num)
             if words is None:
+                # This file has no text for this verse number.
                 verse_row.append("")
                 words_by_column.append([])
             else:
@@ -84,6 +105,10 @@ def align_verse_rows(
 
         rows.append(verse_row)
 
+        # Bottom-align words: pad shorter columns with blank rows at the top so
+        # the last word of each verse lands on the same CSV row. For column i
+        # with len(words) items, word k is written at row index
+        # max_words - len(words) + k.
         max_words = max((len(words) for words in words_by_column), default=0)
         for word_idx in range(max_words):
             rows.append(
@@ -105,6 +130,7 @@ def read_verses(path: Path) -> list[tuple[str, list[str]]]:
 
 def write_csv(rows: list[list[str]], headers: list[str], output_path: Path) -> Path:
     output_path = output_path.resolve()
+    # Write to a sibling .tmp first so a failed replace never truncates the target.
     temp_path = output_path.with_name(output_path.name + ".tmp")
 
     with temp_path.open("w", encoding="utf-8-sig", newline="") as f:
@@ -116,6 +142,7 @@ def write_csv(rows: list[list[str]], headers: list[str], output_path: Path) -> P
         temp_path.replace(output_path)
         return output_path
     except PermissionError:
+        # Typical cause: output.csv is open in Excel on Windows.
         print(
             f"Error: cannot write to {output_path.name} — "
             "close it in Excel (or another program) and run again.",

@@ -21,6 +21,7 @@ from hebrew_morphology import (
     morphhb_book_path,
     parse_morphhb_verse,
 )
+from bible_to_csv import verse_order
 from pysword.modules import SwordModules
 
 SWORD_ROOT = Path(__file__).resolve().parent / "SWORD"
@@ -52,6 +53,10 @@ CSV_COLUMNS = (
     "Gender",
     "xlit",
     "betacode",
+)
+
+SYNOPTIC_METADATA_COLUMNS = tuple(
+    column for column in CSV_COLUMNS if column not in ("word", "verse")
 )
 
 PRONOUN_TYPES = {
@@ -462,6 +467,27 @@ def write_csv(rows: list[dict[str, str]], output_path: Path) -> Path:
         writer.writeheader()
         writer.writerows(rows)
 
+    return _finalize_csv_write(output_path, temp_path)
+
+
+def write_synoptic_csv(
+    rows: list[dict[str, str]],
+    output_path: Path,
+    *,
+    columns: tuple[str, ...],
+) -> Path:
+    output_path = output_path.resolve()
+    temp_path = output_path.with_name(output_path.name + ".tmp")
+
+    with temp_path.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return _finalize_csv_write(output_path, temp_path)
+
+
+def _finalize_csv_write(output_path: Path, temp_path: Path) -> Path:
     try:
         temp_path.replace(output_path)
         return output_path
@@ -473,6 +499,109 @@ def write_csv(rows: list[dict[str, str]], output_path: Path) -> Path:
         )
         print(f"Output saved instead as {temp_path.name}", file=sys.stderr)
         return temp_path
+
+
+def synoptic_prefixed_column(text_name: str, column: str) -> str:
+    return f"{text_name}_{column}"
+
+
+def synoptic_column_headers(text_names: list[str]) -> tuple[str, ...]:
+    headers: list[str] = []
+    for text_name in text_names:
+        headers.append(text_name)
+        headers.extend(
+            synoptic_prefixed_column(text_name, column)
+            for column in SYNOPTIC_METADATA_COLUMNS
+        )
+    return tuple(headers)
+
+
+def rows_to_verse_row_lists(
+    rows: list[dict[str, str]],
+) -> list[tuple[str, list[dict[str, str]]]]:
+    """Group flat word rows into ordered (verse number, row dicts) pairs."""
+    verses: list[tuple[str, list[dict[str, str]]]] = []
+    current_verse: str | None = None
+    current_rows: list[dict[str, str]] = []
+
+    for row in rows:
+        verse = row["verse"]
+        if verse != current_verse:
+            if current_verse is not None:
+                verses.append((current_verse, current_rows))
+            current_verse = verse
+            current_rows = [row]
+        else:
+            current_rows.append(row)
+
+    if current_verse is not None:
+        verses.append((current_verse, current_rows))
+    return verses
+
+
+def _empty_synoptic_fields(text_names: list[str]) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for text_name in text_names:
+        fields[text_name] = ""
+        for column in SYNOPTIC_METADATA_COLUMNS:
+            fields[synoptic_prefixed_column(text_name, column)] = ""
+    return fields
+
+
+def build_synoptic_rows(
+    text_row_sets: list[list[dict[str, str]]],
+    text_names: list[str],
+) -> tuple[list[dict[str, str]], tuple[str, ...]]:
+    """Align multiple texts by verse with full morphology columns per text."""
+    verse_row_lists = [rows_to_verse_row_lists(rows) for rows in text_row_sets]
+    word_only_lists = [
+        [(verse, [row["word"] for row in verse_rows]) for verse, verse_rows in verse_list]
+        for verse_list in verse_row_lists
+    ]
+    ordered_verse_nums = verse_order(word_only_lists)
+    columns = synoptic_column_headers(text_names)
+    output_rows: list[dict[str, str]] = []
+
+    for verse_num in ordered_verse_nums:
+        rows_by_text: list[list[dict[str, str]]] = []
+        for verse_rows in verse_row_lists:
+            verse_map = {verse: rows for verse, rows in verse_rows}
+            rows_by_text.append(verse_map.get(verse_num, []))
+
+        verse_row = _empty_synoptic_fields(text_names)
+        for text_name, text_rows in zip(text_names, rows_by_text, strict=True):
+            if text_rows:
+                verse_row[text_name] = verse_num
+        output_rows.append(verse_row)
+
+        max_words = max((len(text_rows) for text_rows in rows_by_text), default=0)
+        for word_idx in range(max_words):
+            aligned = _empty_synoptic_fields(text_names)
+            for text_name, text_rows in zip(text_names, rows_by_text, strict=True):
+                if word_idx >= max_words - len(text_rows):
+                    source_row = text_rows[word_idx - (max_words - len(text_rows))]
+                    aligned[text_name] = source_row["word"]
+                    for column in SYNOPTIC_METADATA_COLUMNS:
+                        aligned[synoptic_prefixed_column(text_name, column)] = source_row.get(
+                            column, ""
+                        )
+            output_rows.append(aligned)
+
+    return output_rows, columns
+
+
+def count_synoptic_words(
+    rows: list[dict[str, str]],
+    text_names: list[str],
+) -> dict[str, int]:
+    """Return per-text word counts from aligned synoptic rows."""
+    counts = {name: 0 for name in text_names}
+    for row in rows:
+        for name in text_names:
+            cell = row.get(name, "")
+            if cell and not cell.isdigit():
+                counts[name] += 1
+    return counts
 
 
 def build_arg_parser(
@@ -503,7 +632,103 @@ def build_arg_parser(
         type=Path,
         help="Output CSV path (default: <book>_<chapter>.csv)",
     )
+    parser.add_argument(
+        "--synoptic",
+        action="store_true",
+        help="Export WLC and LXX side by side, verse-aligned (ignores --text)",
+    )
     return parser
+
+
+def export_chapter(
+    text_name: str,
+    book: str,
+    chapter: int,
+    output_path: Path | None = None,
+    *,
+    sword_dir: Path | None = None,
+    module_name: str | None = None,
+) -> tuple[Path, int, str]:
+    """Export one chapter to CSV.
+
+    Returns (written_path, word_count, osis_book). Raises on invalid input or
+    missing data.
+    """
+    sources = discover_text_sources()
+    if not sources:
+        raise FileNotFoundError(f"No text sources found under {SWORD_ROOT}")
+
+    resolved_dir, resolved_module = resolve_text_source(text_name, sources)
+    text_name = text_name.strip().upper()
+    sword_dir = sword_dir or resolved_dir
+    module_name = module_name or resolved_module
+
+    bible = load_bible(sword_dir, module_name)
+    osis_book = resolve_book_name(book, bible)
+    chapter_verse_count(bible, osis_book, chapter)
+
+    rows = extract_chapter_rows(text_name, bible, sword_dir, osis_book, chapter)
+    if not rows:
+        raise ValueError("No words found for that reference.")
+
+    target = output_path or Path(f"{text_name}_{osis_book}_{chapter}.csv")
+    written_path = write_csv(rows, target)
+    return written_path, len(rows), osis_book
+
+
+def export_synoptic_chapter(
+    book: str,
+    chapter: int,
+    text_names: list[str] | None = None,
+    output_path: Path | None = None,
+) -> tuple[Path, dict[str, int], str]:
+    """Export one chapter with multiple texts aligned in separate columns.
+
+    Returns (written_path, {text_name: word_count}, osis_book).
+    """
+    sources = discover_text_sources()
+    normalized = sorted(name.strip().upper() for name in (text_names or ["WLC", "LXX"]))
+    if len(normalized) < 2:
+        raise ValueError("Synoptic export requires at least two text sources.")
+
+    missing = [name for name in normalized if name not in sources]
+    if missing:
+        raise FileNotFoundError(
+            f"Text sources not found: {', '.join(missing)}. "
+            f"Available: {', '.join(sorted(sources))}"
+        )
+
+    all_row_sets: list[list[dict[str, str]]] = []
+    osis_book: str | None = None
+
+    for text_name in normalized:
+        sword_dir, module_name = resolve_text_source(text_name, sources)
+        bible = load_bible(sword_dir, module_name)
+        try:
+            resolved_book = resolve_book_name(book, bible)
+        except ValueError as exc:
+            raise ValueError(f"{text_name} does not contain book '{book}'.") from exc
+        chapter_verse_count(bible, resolved_book, chapter)
+        if osis_book is None:
+            osis_book = resolved_book
+        rows = extract_chapter_rows(text_name, bible, sword_dir, resolved_book, chapter)
+        all_row_sets.append(rows)
+
+    if not any(all_row_sets):
+        raise ValueError("No words found for that reference.")
+
+    aligned_rows, columns = build_synoptic_rows(all_row_sets, normalized)
+    word_counts = count_synoptic_words(aligned_rows, normalized)
+
+    if output_path is None:
+        if normalized == ["LXX", "WLC"] or normalized == ["WLC", "LXX"]:
+            default_name = f"Synoptic_{osis_book}_{chapter}.csv"
+        else:
+            default_name = f"{'_'.join(normalized)}_{osis_book}_{chapter}.csv"
+        output_path = Path(default_name)
+
+    written_path = write_synoptic_csv(aligned_rows, output_path, columns=columns)
+    return written_path, word_counts, osis_book or book
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -514,6 +739,64 @@ def main(argv: list[str] | None = None) -> int:
 
     parser = build_arg_parser(sources)
     args = parser.parse_args(argv)
+
+    if args.book and args.chapter:
+        book_input = args.book
+        chapter = args.chapter
+    elif args.book or args.chapter:
+        print("Error: provide both --book and --chapter, or neither.", file=sys.stderr)
+        return 1
+    elif args.synoptic:
+        try:
+            wlc_dir, wlc_module = resolve_text_source("WLC", sources)
+        except KeyError as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+        bible = load_bible(wlc_dir, wlc_module)
+        book_input, chapter = prompt_book_and_chapter(bible)
+    else:
+        if args.text:
+            try:
+                sword_dir, module_name = resolve_text_source(args.text, sources)
+                text_name = args.text.upper()
+            except KeyError as exc:
+                print(f"Error: {exc}", file=sys.stderr)
+                return 1
+        elif sys.stdin.isatty():
+            text_name = prompt_text_source(sources)
+            sword_dir, module_name = resolve_text_source(text_name, sources)
+        else:
+            text_name = DEFAULT_TEXT
+            sword_dir, module_name = resolve_text_source(text_name, sources)
+
+        if args.sword_dir:
+            sword_dir = args.sword_dir
+        if args.module:
+            module_name = args.module
+
+        try:
+            bible = load_bible(sword_dir, module_name)
+        except (FileNotFoundError, KeyError) as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+        book_input, chapter = prompt_book_and_chapter(bible)
+
+    if args.synoptic:
+        try:
+            written_path, word_counts, osis_book = export_synoptic_chapter(
+                book_input,
+                chapter,
+                ["WLC", "LXX"],
+                args.output,
+            )
+        except (FileNotFoundError, KeyError, ValueError) as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+
+        intended_path = args.output or Path(f"Synoptic_{osis_book}_{chapter}.csv")
+        counts_msg = " + ".join(f"{count} {name}" for name, count in word_counts.items())
+        print(f"Wrote {written_path.name} ({counts_msg} words, {osis_book} {chapter})")
+        return 0 if written_path.resolve() == intended_path.resolve() else 1
 
     if args.text:
         try:
@@ -535,38 +818,24 @@ def main(argv: list[str] | None = None) -> int:
         module_name = args.module
 
     try:
-        bible = load_bible(sword_dir, module_name)
-    except (FileNotFoundError, KeyError) as exc:
+        written_path, word_count, osis_book = export_chapter(
+            text_name,
+            book_input,
+            chapter,
+            args.output,
+            sword_dir=sword_dir,
+            module_name=module_name,
+        )
+    except (FileNotFoundError, KeyError, ValueError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
 
-    if args.book and args.chapter:
-        try:
-            osis_book = resolve_book_name(args.book, bible)
-            chapter_verse_count(bible, osis_book, args.chapter)
-            chapter = args.chapter
-        except ValueError as exc:
-            print(f"Error: {exc}", file=sys.stderr)
-            return 1
-    elif args.book or args.chapter:
-        print("Error: provide both --book and --chapter, or neither.", file=sys.stderr)
-        return 1
-    else:
-        osis_book, chapter = prompt_book_and_chapter(bible)
-
-    rows = extract_chapter_rows(text_name, bible, sword_dir, osis_book, chapter)
-    if not rows:
-        print("No words found for that reference.", file=sys.stderr)
-        return 1
-
-    output_path = args.output or Path(f"{text_name}_{osis_book}_{chapter}.csv")
-    written_path = write_csv(rows, output_path)
-
+    intended_path = args.output or Path(f"{text_name}_{osis_book}_{chapter}.csv")
     print(
-        f"Wrote {written_path.name} ({len(rows)} words from {text_name} "
+        f"Wrote {written_path.name} ({word_count} words from {text_name} "
         f"{osis_book} {chapter})"
     )
-    return 0 if written_path == output_path.resolve() else 1
+    return 0 if written_path.resolve() == intended_path.resolve() else 1
 
 
 if __name__ == "__main__":
