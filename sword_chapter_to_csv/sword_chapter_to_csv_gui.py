@@ -68,7 +68,7 @@ class ExportApp(tk.Tk):
                     text=name,
                     variable=var,
                     command=self._on_text_selection_changed,
-                ).grid(row=index // 4, column=index % 4, sticky="w", padx=(0, 16), pady=2)
+                ).grid(row=index, column=0, sticky="w", pady=2)
         else:
             ttk.Label(texts_frame, text="No texts found under SWORD/").grid(
                 row=0, column=0, sticky="w"
