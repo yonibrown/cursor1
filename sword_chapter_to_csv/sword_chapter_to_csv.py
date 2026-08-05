@@ -21,6 +21,7 @@ from hebrew_morphology import (
     morphhb_book_path,
     parse_morphhb_verse,
 )
+from strongs_lexicon import lookup_greek_root, lookup_hebrew_root, strongs_lexicon_available
 from bible_to_csv import verse_order
 from pysword.modules import SwordModules
 
@@ -42,6 +43,7 @@ CSV_COLUMNS = (
     "verse",
     "word_num",
     "lemma",
+    "root",
     "strongs",
     "morph",
     "morphology",
@@ -259,6 +261,7 @@ def plain_text_word_rows(text: str, verse_num: int, parser: str) -> list[dict[st
             "word": word,
             "verse": str(verse_num),
             "lemma": "",
+            "root": "",
             "strongs": "",
             "morph": "",
             "morphology": "",
@@ -291,11 +294,13 @@ def parse_greek_osis_words(osis_text: str, verse_num: int) -> list[dict[str, str
         xlit = element.get("xlit", "")
 
         morphology_code = strip_prefix(morph, "packard:")
+        strongs = strip_prefix(lemma, "strong:")
         row = {
             "word": word,
             "verse": str(verse_num),
             "lemma": lemma,
-            "strongs": strip_prefix(lemma, "strong:"),
+            "root": lookup_greek_root(strongs),
+            "strongs": strongs,
             "morph": morph,
             "morphology": morphology_code,
             "xlit": xlit,
@@ -757,6 +762,13 @@ def export_chapter(
     rows = extract_chapter_rows(text_name, bible, sword_dir, osis_book, chapter)
     if not rows:
         raise ValueError("No words found for that reference.")
+
+    if include_grammatical_data and not strongs_lexicon_available():
+        print(
+            "Warning: Strong's lexicon files not found in strongs/. "
+            "The root column will be empty. Download from openscriptures/strongs.",
+            file=sys.stderr,
+        )
 
     word_count = len(rows)
     rows = assign_word_keys_and_numbers(rows, text_name, osis_book, chapter)

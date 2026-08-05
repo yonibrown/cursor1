@@ -6,6 +6,8 @@ import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from strongs_lexicon import lookup_hebrew_root
+
 HEBREW_POS = {
     "A": "Adjective",
     "C": "Conjunction",
@@ -296,6 +298,7 @@ def word_row_from_morphhb(element: ET.Element, verse_num: int) -> dict[str, str]
         "word": word,
         "verse": str(verse_num),
         "lemma": lemma,
+        "root": lookup_hebrew_root(strongs),
         "strongs": strongs,
         "morph": morph_raw,
         "morphology": morphology_code,
